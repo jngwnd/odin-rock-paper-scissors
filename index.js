@@ -26,12 +26,6 @@ function getHumanChoice() {
 }
 
 /*
-Initialize variables for score keeping.
-*/
-let humanScore = 0,
-    computerScore = 0;
-
-/*
 Write a function that takes player and computer choices as arguments, plays a single round, increments the winner's score, and logs the
 winner in the console.
 
@@ -48,7 +42,7 @@ function playRound(humanChoice, computerChoice) {
         "paper, rock": "You won! Paper beats rock.",
         "scissors, paper": "You won! Scissors beats paper.",
         "rock, scissors": "You won! Rock beats scissors."
-    }
+    };
 
     if (humanChoice === computerChoice) {
         console.log("You tied.");
@@ -59,9 +53,43 @@ function playRound(humanChoice, computerChoice) {
     let result = winCondition[key].includes("won");
     console.log(winCondition[key]);
 
-    if (result) {
-        humanScore++;
-    } else {
-        computerScore++;
-    }
+    return result;
 }
+
+/*
+Write a function that plays five rounds of Rock, Paper, Scissors, keeping track of scores and declares a winner at the end.
+
+STEP 1: Initialize score variables.
+STEP 2: Create for loop for the five rounds.
+STEP 3: Initialize variables for getHumanChoice(), getComputerChoice(), and playRound() result.
+STEP 4: Modify score based on playRound() result (in the case of a tie, repeat the round).
+*/
+function playGame() {
+    let humanScore = 0,
+        computerScore = 0;
+
+    console.log("Best of 5 rounds. Start!");
+    
+    for (let i = 0; i < 5; i++) {
+        let humanMove = getHumanChoice();
+        let computerMove = getComputerChoice();
+
+        let result = playRound(humanMove, computerMove);
+        
+        switch (result) {
+            case true:
+                humanScore++;
+                break;
+            case false:
+                computerScore++;
+                break;
+            default:
+                i--;
+
+        }
+    }
+
+    console.log((humanScore > computerScore) ? "Congratulations! You beat the computer!" : "You lost... Better luck next time.");
+}
+
+playGame();
