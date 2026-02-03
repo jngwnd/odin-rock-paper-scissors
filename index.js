@@ -13,3 +13,14 @@ function getComputerChoice() {
             return "Scissors";
     }
 }
+
+/*
+Write a function that takes the user choice and returns it. Assume that the user input will be valid.
+
+STEP 1: Prompt player's move.
+STEP 2: Restructure string for capitalization and return.
+*/
+function getHumanChoice() {
+    let choice = prompt("Make your move (rock, paper, scissors):");
+    return `${choice.slice(0, 1).toUpperCase()}${choice.slice(1).toLowerCase()}`;
+}
